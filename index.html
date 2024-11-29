@@ -3,49 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Model Viewer</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.110.0/examples/js/loaders/GLTFLoader.js"></script>
-    <style>
-        body { margin: 0; }
-        canvas { display: block; }
-    </style>
+    <title>SNU 3D Model Viewer</title>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.module.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
 <body>
-    <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        const light = new THREE.AmbientLight(0xffffff); // Add soft white light
-        scene.add(light);
-
-        const loader = new THREE.GLTFLoader();
-        const modelUrl = 'https://drive.google.com/uc?id=FILE_ID'; // Replace FILE_ID with your Google Drive file ID
-        loader.load(
-            modelUrl,
-            function (gltf) {
-                scene.add(gltf.scene);
-                gltf.scene.position.set(0, 0, 0);
-                gltf.scene.scale.set(1, 1, 1);
-            },
-            function (xhr) {
-                console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-            },
-            function (error) {
-                console.error('An error happened', error);
-            }
-        );
-
-        camera.position.z = 5;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-        animate();
-    </script>
+    <h1>SNU 3D Model Viewer</h1>
+    <model-viewer src="snu4.glb" alt="SNU 3D Model" camera-controls auto-rotate style="width: 100%; height: 100vh;"></model-viewer>
 </body>
 </html>
